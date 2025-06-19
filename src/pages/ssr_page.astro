@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import img from "../assets/astro.svg"
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -9,4 +11,5 @@ export const prerender = false;
 
 <Layout>
 	<Welcome />
+	<Image src={img} alt={"Some alt"}/>
 </Layout>
