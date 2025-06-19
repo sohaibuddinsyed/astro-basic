@@ -1,5 +1,7 @@
 # build output
 dist/
+.amplify-hosting/
+.vscode/
 
 # generated types
 .astro/

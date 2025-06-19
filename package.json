@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@craftlions/astro-adapter": "1.9.3",
     "astro": "^5.8.1"
   }
 }
