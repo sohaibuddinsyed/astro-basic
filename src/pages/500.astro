@@ -1,0 +1,308 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Simulate server error information
+const errorTime = new Date().toISOString();
+const errorId = Math.random().toString(36).substring(2, 15);
+---
+
+<Layout title="500 - Internal Server Error">
+	<main>
+		<div class="error-container">
+			<div class="error-code">500</div>
+			<h1>⚠️ Internal Server Error</h1>
+			<p class="error-message">
+				Something went wrong on our end. We're working to fix this issue.
+			</p>
+			
+			<div class="error-details">
+				<p><strong>Error ID:</strong> <code>{errorId}</code></p>
+				<p><strong>Timestamp:</strong> {errorTime}</p>
+				<p><strong>Error Type:</strong> Internal Server Error</p>
+				<p><strong>Status Code:</strong> 500</p>
+			</div>
+			
+			<div class="what-happened">
+				<h2>🤔 What happened?</h2>
+				<p>
+					A 500 Internal Server Error means something went wrong on the server side. 
+					This could be due to:
+				</p>
+				<ul>
+					<li>Server configuration issues</li>
+					<li>Database connection problems</li>
+					<li>Code execution errors</li>
+					<li>Resource limitations</li>
+					<li>Third-party service failures</li>
+				</ul>
+			</div>
+			
+			<div class="what-to-do">
+				<h2>🔧 What can you do?</h2>
+				<div class="actions-grid">
+					<div class="action-card">
+						<h3>🔄 Try Again</h3>
+						<p>The issue might be temporary</p>
+						<button onclick="window.location.reload()" class="action-button">
+							Refresh Page
+						</button>
+					</div>
+					
+					<div class="action-card">
+						<h3>🏠 Go Home</h3>
+						<p>Return to the main page</p>
+						<a href="/" class="action-button">
+							Go to Homepage
+						</a>
+					</div>
+					
+					<div class="action-card">
+						<h3>⏰ Wait</h3>
+						<p>Come back in a few minutes</p>
+						<button onclick="setTimeout(() => window.location.reload(), 60000)" class="action-button">
+							Auto-retry in 1min
+						</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="technical-info">
+				<h2>🔍 Technical Information</h2>
+				<div class="tech-grid">
+					<div class="tech-item">
+						<strong>Server:</strong> Astro SSR
+					</div>
+					<div class="tech-item">
+						<strong>Runtime:</strong> Node.js
+					</div>
+					<div class="tech-item">
+						<strong>Error Code:</strong> HTTP 500
+					</div>
+					<div class="tech-item">
+						<strong>Retry Safe:</strong> Yes
+					</div>
+				</div>
+			</div>
+			
+			<div class="astro-ssr-info">
+				<h2>🚀 Astro SSR Error Handling</h2>
+				<p>
+					This 500 error page demonstrates server-side error handling in Astro. 
+					In a production environment, you would:
+				</p>
+				<ul>
+					<li>Log detailed error information for debugging</li>
+					<li>Show user-friendly error messages</li>
+					<li>Implement error monitoring and alerting</li>
+					<li>Provide fallback content when possible</li>
+					<li>Set up proper error boundaries</li>
+				</ul>
+			</div>
+			
+			<div class="error-prevention">
+				<h2>🛡️ Error Prevention</h2>
+				<div class="prevention-grid">
+					<div class="prevention-item">
+						<h3>Monitoring</h3>
+						<p>Implement comprehensive error monitoring and logging</p>
+					</div>
+					<div class="prevention-item">
+						<h3>Testing</h3>
+						<p>Thorough testing of server-side functionality</p>
+					</div>
+					<div class="prevention-item">
+						<h3>Fallbacks</h3>
+						<p>Graceful degradation and fallback mechanisms</p>
+					</div>
+					<div class="prevention-item">
+						<h3>Health Checks</h3>
+						<p>Regular health checks and automated recovery</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="contact-info">
+				<h3>📞 Need Help?</h3>
+				<p>If this problem persists, please contact our support team with the error ID above.</p>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+		min-height: 80vh;
+		display: flex;
+		align-items: center;
+	}
+	
+	.error-container {
+		width: 100%;
+		text-align: center;
+	}
+	
+	.error-code {
+		font-size: 8rem;
+		font-weight: bold;
+		color: #ff6b6b;
+		text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+		margin-bottom: 1rem;
+		line-height: 1;
+		animation: pulse 2s infinite;
+	}
+	
+	@keyframes pulse {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.7; }
+	}
+	
+	h1 {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+		color: #ff6b6b;
+	}
+	
+	.error-message {
+		font-size: 1.3rem;
+		margin-bottom: 2rem;
+		color: #ddd;
+	}
+	
+	.error-details {
+		background: rgba(255, 107, 107, 0.1);
+		border: 1px solid rgba(255, 107, 107, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+		text-align: left;
+	}
+	
+	.what-happened {
+		background: rgba(255, 165, 0, 0.1);
+		border: 1px solid rgba(255, 165, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+		text-align: left;
+	}
+	
+	.what-to-do {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.actions-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	
+	.action-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1.5rem;
+		border-radius: 6px;
+		text-align: center;
+	}
+	
+	.action-button {
+		background: #4f39fa;
+		color: white;
+		border: none;
+		padding: 0.8rem 1.5rem;
+		border-radius: 6px;
+		text-decoration: none;
+		display: inline-block;
+		margin-top: 1rem;
+		cursor: pointer;
+		transition: background-color 0.3s;
+		font-size: 14px;
+	}
+	
+	.action-button:hover {
+		background: #3d2fd8;
+	}
+	
+	.technical-info {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.tech-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	
+	.tech-item {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1rem;
+		border-radius: 4px;
+		font-size: 14px;
+	}
+	
+	.astro-ssr-info {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+		text-align: left;
+	}
+	
+	.error-prevention {
+		background: rgba(0, 255, 255, 0.1);
+		border: 1px solid rgba(0, 255, 255, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.prevention-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	
+	.prevention-item {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1rem;
+		border-radius: 4px;
+		text-align: center;
+	}
+	
+	.contact-info {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+	
+	h2, h3 {
+		color: #4f39fa;
+		margin-bottom: 1rem;
+	}
+</style>

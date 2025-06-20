@@ -9,7 +9,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.3.0",
+    "@astrojs/svelte": "^7.1.0",
     "@craftlions/astro-adapter": "1.9.3",
-    "astro": "^5.8.1"
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "astro": "^5.8.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sharp": "^0.34.2",
+    "svelte": "^5.34.7"
   }
 }

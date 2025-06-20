@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// This page is statically pre-rendered at build time
+export const prerender = true;
+
+const buildTime = new Date().toISOString();
+---
+
+<Layout title="Static Pre-rendered Page">
+	<main>
+		<h1>📄 Static Pre-rendered Page</h1>
+		<p>This page is statically pre-rendered at build time using <code>export const prerender = true;</code></p>
+		
+		<div class="info-box">
+			<h2>ℹ️ Information</h2>
+			<p><strong>Build Time:</strong> {buildTime}</p>
+			<p><strong>Rendering Mode:</strong> Static Site Generation (SSG)</p>
+			<p><strong>When Generated:</strong> At build time</p>
+			<p><strong>Performance:</strong> Fastest - served as static HTML</p>
+		</div>
+		
+		<div class="features">
+			<h2>✨ Features</h2>
+			<ul>
+				<li>Pre-rendered at build time</li>
+				<li>Served as static HTML</li>
+				<li>Excellent performance and SEO</li>
+				<li>Perfect for content that doesn't change often</li>
+				<li>Can be cached by CDNs</li>
+			</ul>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.info-box {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.features {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

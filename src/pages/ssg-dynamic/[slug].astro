@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// This function runs at build time to generate static pages
+export async function getStaticPaths() {
+	// In a real app, you might fetch this data from a CMS or API
+	const posts = [
+		{ slug: 'example-slug', title: 'Example Post', content: 'This is an example post generated at build time.' },
+		{ slug: 'another-post', title: 'Another Post', content: 'This is another post with different content.' },
+		{ slug: 'third-post', title: 'Third Post', content: 'Yet another post to demonstrate dynamic routing.' }
+	];
+
+	return posts.map(post => ({
+		params: { slug: post.slug },
+		props: { post }
+	}));
+}
+
+const { post } = Astro.props;
+const { slug } = Astro.params;
+const buildTime = new Date().toISOString();
+---
+
+<Layout title={`SSG Dynamic: ${post.title}`}>
+	<main>
+		<h1>🔗 SSG Dynamic Route</h1>
+		<p>This page demonstrates Static Site Generation with dynamic routes using <code>getStaticPaths()</code>.</p>
+		
+		<div class="post-content">
+			<h2>{post.title}</h2>
+			<p><strong>Slug:</strong> {slug}</p>
+			<p><strong>Generated at:</strong> {buildTime}</p>
+			<div class="content">
+				{post.content}
+			</div>
+		</div>
+		
+		<div class="available-routes">
+			<h3>📋 Available Routes</h3>
+			<p>These routes were pre-generated at build time:</p>
+			<ul>
+				<li><a href="/ssg-dynamic/example-slug">example-slug</a></li>
+				<li><a href="/ssg-dynamic/another-post">another-post</a></li>
+				<li><a href="/ssg-dynamic/third-post">third-post</a></li>
+			</ul>
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ How SSG Dynamic Routes Work</h2>
+			<ul>
+				<li><strong>getStaticPaths():</strong> Runs at build time to determine which pages to generate</li>
+				<li><strong>Pre-generated:</strong> All possible routes are created during build</li>
+				<li><strong>Static files:</strong> Each route becomes a static HTML file</li>
+				<li><strong>Fast serving:</strong> No server-side processing needed</li>
+				<li><strong>SEO friendly:</strong> All content is available to search engines</li>
+			</ul>
+		</div>
+		
+		<div class="code-example">
+			<h3>💻 Code Example</h3>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.post-content {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.available-routes {
+		background: rgba(255, 165, 0, 0.1);
+		border: 1px solid rgba(255, 165, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.available-routes a {
+		color: #4f39fa;
+		text-decoration: none;
+	}
+	
+	.available-routes a:hover {
+		text-decoration: underline;
+	}
+	
+	.info-box {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.code-example {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.code-example pre {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 1rem;
+		border-radius: 4px;
+		overflow-x: auto;
+	}
+	
+	.code-example code {
+		font-family: 'Courier New', monospace;
+		font-size: 14px;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

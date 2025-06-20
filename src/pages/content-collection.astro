@@ -1,0 +1,315 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all blog posts from the content collection
+const blogPosts = await getCollection('blog');
+
+// Sort posts by publication date (newest first)
+const sortedPosts = blogPosts.sort((a, b) => 
+	new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<Layout title="Content Collection Demo">
+	<main>
+		<h1>📚 Content Collection Demo</h1>
+		<p>This page demonstrates Astro's Content Collections feature for managing and querying content with type safety.</p>
+		
+		<div class="collection-info">
+			<h2>📊 Collection Statistics</h2>
+			<p><strong>Total Posts:</strong> {blogPosts.length}</p>
+			<p><strong>Collection Type:</strong> Content (Markdown/MDX)</p>
+			<p><strong>Schema Validation:</strong> ✅ Enabled</p>
+		</div>
+		
+		<div class="posts-section">
+			<h2>📝 Blog Posts</h2>
+			<div class="posts-grid">
+				{sortedPosts.map((post) => (
+					<article class="post-card">
+						<h3>{post.data.title}</h3>
+						<p class="post-meta">
+							<span class="author">By {post.data.author}</span>
+							<span class="date">{post.data.pubDate.toLocaleDateString()}</span>
+						</p>
+						<p class="description">{post.data.description}</p>
+						{post.data.tags && (
+							<div class="tags">
+								{post.data.tags.map((tag) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+						)}
+						<a href={`/blog/${post.slug}`} class="read-more">Read More →</a>
+					</article>
+				))}
+			</div>
+		</div>
+		
+		<div class="schema-section">
+			<h2>🔧 Content Schema</h2>
+		</div>
+		
+		<div class="features-section">
+			<h2>✨ Content Collections Features</h2>
+			<div class="features-grid">
+				<div class="feature-card">
+					<h3>🛡️ Type Safety</h3>
+					<p>Full TypeScript support with automatic type generation from your schema</p>
+				</div>
+				
+				<div class="feature-card">
+					<h3>✅ Validation</h3>
+					<p>Automatic validation of frontmatter data against your schema</p>
+				</div>
+				
+				<div class="feature-card">
+					<h3>🔍 Querying</h3>
+					<p>Powerful querying with <code>getCollection()</code> and <code>getEntry()</code></p>
+				</div>
+				
+				<div class="feature-card">
+					<h3>📁 Organization</h3>
+					<p>Organize content in collections with consistent structure</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="api-examples">
+			<h2>💻 API Examples</h2>
+			<div class="example-grid">
+				<div class="example-card">
+					<h3>Get All Posts</h3>
+					<pre><code>const posts = await getCollection('blog');</code></pre>
+				</div>
+				
+				<div class="example-card">
+					<h3>Get Single Post</h3>
+					<pre><code>const post = await getEntry('blog', 'my-post');</code></pre>
+				</div>
+			</div>
+		</div>
+		
+		<div class="file-structure">
+			<h2>📂 File Structure</h2>
+			<pre><code>src/
+├── content/
+│   ├── config.ts          # Collection definitions
+│   └── blog/              # Blog collection
+│       ├── post-1.md
+│       ├── post-2.md
+│       └── post-3.md
+└── pages/
+    └── blog/
+        └── [slug].astro   # Dynamic route for posts</code></pre>
+		</div>
+		
+		<div class="benefits">
+			<h2>🎯 Benefits of Content Collections</h2>
+			<ul>
+				<li><strong>Developer Experience:</strong> IntelliSense and type checking for content</li>
+				<li><strong>Content Validation:</strong> Catch errors early with schema validation</li>
+				<li><strong>Performance:</strong> Optimized content loading and caching</li>
+				<li><strong>Flexibility:</strong> Support for Markdown, MDX, and JSON content</li>
+				<li><strong>Scalability:</strong> Efficient handling of large amounts of content</li>
+				<li><strong>SEO:</strong> Built-in support for metadata and structured data</li>
+			</ul>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.collection-info {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.posts-section {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.posts-grid {
+		display: grid;
+		gap: 1.5rem;
+		margin-top: 1rem;
+	}
+	
+	.post-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1.5rem;
+		border-radius: 8px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	
+	.post-card h3 {
+		margin: 0 0 0.5rem 0;
+		color: #4f39fa;
+	}
+	
+	.post-meta {
+		display: flex;
+		justify-content: space-between;
+		font-size: 14px;
+		color: #ccc;
+		margin-bottom: 1rem;
+	}
+	
+	.description {
+		margin: 1rem 0;
+		color: #ddd;
+	}
+	
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 1rem 0;
+	}
+	
+	.tag {
+		background: rgba(79, 57, 250, 0.3);
+		padding: 0.2rem 0.6rem;
+		border-radius: 12px;
+		font-size: 12px;
+		color: white;
+	}
+	
+	.read-more {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.read-more:hover {
+		text-decoration: underline;
+	}
+	
+	.schema-section {
+		background: rgba(255, 165, 0, 0.1);
+		border: 1px solid rgba(255, 165, 0, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.schema-section pre {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 1rem;
+		border-radius: 4px;
+		overflow-x: auto;
+		margin-top: 1rem;
+	}
+	
+	.features-section {
+		background: rgba(0, 255, 255, 0.1);
+		border: 1px solid rgba(0, 255, 255, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	
+	.feature-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1.5rem;
+		border-radius: 6px;
+		text-align: center;
+	}
+	
+	.api-examples {
+		background: rgba(255, 0, 255, 0.1);
+		border: 1px solid rgba(255, 0, 255, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.example-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	
+	.example-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1rem;
+		border-radius: 6px;
+	}
+	
+	.example-card pre {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 0.8rem;
+		border-radius: 4px;
+		font-size: 12px;
+		margin-top: 0.5rem;
+		overflow-x: auto;
+	}
+	
+	.file-structure {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.file-structure pre {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 1rem;
+		border-radius: 4px;
+		overflow-x: auto;
+		margin-top: 1rem;
+	}
+	
+	.benefits {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

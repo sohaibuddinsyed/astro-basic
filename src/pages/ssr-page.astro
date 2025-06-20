@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Enable server-side rendering for this page
+export const prerender = false;
+
+// This code runs on each request
+const requestTime = new Date().toISOString();
+const randomNumber = Math.floor(Math.random() * 1000);
+const userAgent = Astro.request.headers.get('user-agent') || 'Unknown';
+const requestUrl = Astro.url.href;
+
+// Simulate server-side data fetching
+const serverData = {
+	serverTime: requestTime,
+	randomValue: randomNumber,
+	requestCount: Math.floor(Math.random() * 10000), // Simulated
+	serverLoad: (Math.random() * 100).toFixed(1) + '%'
+};
+---
+
+<Layout title="SSR Page Demo">
+	<main>
+		<h1>🖥️ Server-Side Rendering (SSR) Page</h1>
+		<p>This page is rendered on the server for each request using <code>export const prerender = false;</code></p>
+		
+		<div class="request-info">
+			<h2>📊 Request Information</h2>
+			<p><strong>Request Time:</strong> {requestTime}</p>
+			<p><strong>Random Number:</strong> {randomNumber}</p>
+			<p><strong>Request URL:</strong> {requestUrl}</p>
+			<p><strong>User Agent:</strong> {userAgent.substring(0, 100)}...</p>
+		</div>
+		
+		<div class="server-data">
+			<h2>🔄 Dynamic Server Data</h2>
+			<div class="data-grid">
+				<div class="data-card">
+					<h3>Server Time</h3>
+					<div class="data-value">{serverData.serverTime}</div>
+				</div>
+				<div class="data-card">
+					<h3>Random Value</h3>
+					<div class="data-value">{serverData.randomValue}</div>
+				</div>
+				<div class="data-card">
+					<h3>Request Count</h3>
+					<div class="data-value">{serverData.requestCount}</div>
+				</div>
+				<div class="data-card">
+					<h3>Server Load</h3>
+					<div class="data-value">{serverData.serverLoad}</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="refresh-demo">
+			<h3>🔄 Refresh Test</h3>
+			<p>Refresh this page to see the values change - they're generated on each request!</p>
+			<button onclick="window.location.reload()" class="refresh-button">
+				Refresh Page
+			</button>
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ SSR Characteristics</h2>
+			<ul>
+				<li><strong>Server-rendered:</strong> HTML generated on each request</li>
+				<li><strong>Dynamic content:</strong> Can show real-time data</li>
+				<li><strong>Database access:</strong> Can query databases on each request</li>
+				<li><strong>User-specific:</strong> Can personalize content per user</li>
+				<li><strong>Fresh data:</strong> Always shows the latest information</li>
+				<li><strong>Server required:</strong> Needs a server to handle requests</li>
+			</ul>
+		</div>
+		
+		<div class="comparison">
+			<h2>⚖️ SSR vs SSG</h2>
+			<div class="comparison-grid">
+				<div class="comparison-item">
+					<h3>SSR (This Page)</h3>
+					<ul>
+						<li>Generated on each request</li>
+						<li>Dynamic, real-time data</li>
+						<li>Slower initial load</li>
+						<li>Requires server</li>
+						<li>Personalized content</li>
+					</ul>
+				</div>
+				<div class="comparison-item">
+					<h3>SSG</h3>
+					<ul>
+						<li>Generated at build time</li>
+						<li>Static, cached data</li>
+						<li>Faster initial load</li>
+						<li>No server needed</li>
+						<li>Same for all users</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.request-info {
+		background: rgba(255, 0, 0, 0.1);
+		border: 1px solid rgba(255, 0, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.server-data {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.data-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin: 1rem 0;
+	}
+	
+	.data-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1rem;
+		border-radius: 6px;
+		text-align: center;
+	}
+	
+	.data-value {
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #4f39fa;
+		margin-top: 0.5rem;
+	}
+	
+	.refresh-demo {
+		background: rgba(255, 165, 0, 0.1);
+		border: 1px solid rgba(255, 165, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+		text-align: center;
+	}
+	
+	.refresh-button {
+		background: #4f39fa;
+		color: white;
+		border: none;
+		padding: 0.8rem 1.5rem;
+		border-radius: 6px;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+	
+	.refresh-button:hover {
+		background: #3d2fd8;
+	}
+	
+	.info-box {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.comparison {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.comparison-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+		margin-top: 1rem;
+	}
+	
+	.comparison-item {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1rem;
+		border-radius: 6px;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

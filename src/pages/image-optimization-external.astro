@@ -1,0 +1,329 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+---
+
+<Layout title="External Image Optimization">
+	<main>
+		<h1>🌐 External Image Optimization</h1>
+		<p>This page demonstrates how to optimize external images in Astro using various techniques.</p>
+		
+		<div class="external-image-demo">
+			<h2>📸 External Image Examples</h2>
+			
+			<div class="image-example">
+				<h3>Method 1: Regular img tag with optimization attributes</h3>
+				<img 
+					src="https://picsum.photos/400/300?random=1"
+					alt="External image example 1"
+					width="400"
+					height="300"
+					loading="lazy"
+					decoding="async"
+					class="external-image"
+				/>
+				<p class="image-note">Uses loading="lazy" and decoding="async" for performance</p>
+			</div>
+			
+			<div class="image-example">
+				<h3>Method 2: Responsive image with srcset</h3>
+				<img 
+					src="https://picsum.photos/400/300?random=2"
+					srcset="
+						https://picsum.photos/200/150?random=2 200w,
+						https://picsum.photos/400/300?random=2 400w,
+						https://picsum.photos/800/600?random=2 800w
+					"
+					sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
+					alt="Responsive external image"
+					width="400"
+					height="300"
+					loading="lazy"
+					class="external-image"
+				/>
+				<p class="image-note">Uses srcset for responsive images</p>
+			</div>
+			
+			<div class="image-example">
+				<h3>Method 3: Picture element with multiple formats</h3>
+				<picture>
+					<source 
+						srcset="https://picsum.photos/400/300.webp?random=3" 
+						type="image/webp"
+					/>
+					<img 
+						src="https://picsum.photos/400/300?random=3"
+						alt="Picture element example"
+						width="400"
+						height="300"
+						loading="lazy"
+						class="external-image"
+					/>
+				</picture>
+				<p class="image-note">Uses picture element for format fallbacks</p>
+			</div>
+		</div>
+		
+		<div class="optimization-techniques">
+			<h2>🛠️ External Image Optimization Techniques</h2>
+			<div class="techniques-grid">
+				<div class="technique-card">
+					<h3>🚀 Lazy Loading</h3>
+					<p>Use <code>loading="lazy"</code> to defer loading images until they're needed</p>
+					<pre><code>&lt;img loading="lazy" ... /&gt;</code></pre>
+				</div>
+				
+				<div class="technique-card">
+					<h3>⚡ Async Decoding</h3>
+					<p>Use <code>decoding="async"</code> to prevent blocking the main thread</p>
+					<pre><code>&lt;img decoding="async" ... /&gt;</code></pre>
+				</div>
+				
+				<div class="technique-card">
+					<h3>📱 Responsive Images</h3>
+					<p>Use <code>srcset</code> and <code>sizes</code> for different screen sizes</p>
+					<pre><code>&lt;img srcset="small.jpg 300w, large.jpg 800w" /&gt;</code></pre>
+				</div>
+				
+				<div class="technique-card">
+					<h3>🖼️ Modern Formats</h3>
+					<p>Use <code>&lt;picture&gt;</code> element for WebP/AVIF with fallbacks</p>
+					<pre><code>&lt;picture&gt;
+  &lt;source srcset="image.webp" type="image/webp"&gt;
+  &lt;img src="image.jpg" alt="..."&gt;
+&lt;/picture&gt;</code></pre>
+				</div>
+			</div>
+		</div>
+		
+		<div class="cdn-services">
+			<h2>☁️ Image CDN Services</h2>
+			<p>For better external image optimization, consider using image CDN services:</p>
+			<div class="cdn-grid">
+				<div class="cdn-card">
+					<h3>Cloudinary</h3>
+					<p>Automatic optimization, format conversion, and resizing</p>
+					<code>https://res.cloudinary.com/demo/image/fetch/w_400,f_auto,q_auto/https://example.com/image.jpg</code>
+				</div>
+				
+				<div class="cdn-card">
+					<h3>ImageKit</h3>
+					<p>Real-time image optimization and transformation</p>
+					<code>https://ik.imagekit.io/demo/tr:w-400,f-auto,q-auto/https://example.com/image.jpg</code>
+				</div>
+				
+				<div class="cdn-card">
+					<h3>Cloudflare Images</h3>
+					<p>Global CDN with automatic optimization</p>
+					<code>https://imagedelivery.net/account/image-id/w=400,f=auto,q=auto</code>
+				</div>
+			</div>
+		</div>
+		
+		<div class="performance-tips">
+			<h2>⚡ Performance Tips</h2>
+			<ul>
+				<li><strong>Preload critical images:</strong> Use <code>&lt;link rel="preload" as="image"&gt;</code> for above-the-fold images</li>
+				<li><strong>Set dimensions:</strong> Always specify width and height to prevent layout shift</li>
+				<li><strong>Use appropriate formats:</strong> WebP for photos, SVG for icons and simple graphics</li>
+				<li><strong>Optimize quality:</strong> Use 80-85% quality for most images</li>
+				<li><strong>Consider aspect ratios:</strong> Use CSS aspect-ratio to maintain layout</li>
+				<li><strong>Implement blur placeholders:</strong> Show low-quality placeholders while loading</li>
+			</ul>
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ External vs Internal Images</h2>
+			<div class="comparison-table">
+				<table>
+					<thead>
+						<tr>
+							<th>Aspect</th>
+							<th>Internal Images</th>
+							<th>External Images</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Optimization</td>
+							<td>Automatic by Astro</td>
+							<td>Manual or CDN-based</td>
+						</tr>
+						<tr>
+							<td>Build Time</td>
+							<td>Processed during build</td>
+							<td>No build processing</td>
+						</tr>
+						<tr>
+							<td>Caching</td>
+							<td>Cached with site</td>
+							<td>Depends on external server</td>
+						</tr>
+						<tr>
+							<td>Control</td>
+							<td>Full control</td>
+							<td>Limited control</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.external-image-demo {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.image-example {
+		margin: 2rem 0;
+		padding: 1rem;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 6px;
+		text-align: center;
+	}
+	
+	.external-image {
+		border-radius: 8px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		margin: 1rem 0;
+	}
+	
+	.image-note {
+		font-style: italic;
+		color: #ccc;
+		font-size: 14px;
+	}
+	
+	.optimization-techniques {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.techniques-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	
+	.technique-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1.5rem;
+		border-radius: 6px;
+	}
+	
+	.technique-card pre {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 0.5rem;
+		border-radius: 4px;
+		font-size: 12px;
+		margin-top: 0.5rem;
+		overflow-x: auto;
+	}
+	
+	.cdn-services {
+		background: rgba(255, 165, 0, 0.1);
+		border: 1px solid rgba(255, 165, 0, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.cdn-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+	
+	.cdn-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1.5rem;
+		border-radius: 6px;
+	}
+	
+	.cdn-card code {
+		display: block;
+		background: rgba(0, 0, 0, 0.3);
+		padding: 0.5rem;
+		border-radius: 4px;
+		font-size: 11px;
+		margin-top: 0.5rem;
+		word-break: break-all;
+	}
+	
+	.performance-tips {
+		background: rgba(0, 255, 255, 0.1);
+		border: 1px solid rgba(0, 255, 255, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.info-box {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.comparison-table {
+		overflow-x: auto;
+	}
+	
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 1rem;
+	}
+	
+	th, td {
+		padding: 0.8rem;
+		text-align: left;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	}
+	
+	th {
+		background: rgba(79, 57, 250, 0.2);
+		font-weight: bold;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

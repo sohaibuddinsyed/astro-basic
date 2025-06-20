@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Client-side Rendering Demo">
+	<main>
+		<h1>💻 Client-side Rendering Demo</h1>
+		<p>This page demonstrates client-side JavaScript functionality in Astro.</p>
+		
+		<div class="demo-section">
+			<h2>🎯 Interactive Elements</h2>
+			<button id="click-counter" class="demo-button">
+				Clicks: <span id="count">0</span>
+			</button>
+			
+			<div class="time-display">
+				<h3>⏰ Current Time</h3>
+				<div id="current-time"></div>
+			</div>
+			
+			<div class="form-demo">
+				<h3>📝 Form Interaction</h3>
+				<input type="text" id="text-input" placeholder="Type something..." />
+				<div id="text-output">You typed: </div>
+			</div>
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ About Client-side JavaScript in Astro</h2>
+			<ul>
+				<li><strong>Script tags:</strong> Regular JavaScript works in Astro pages</li>
+				<li><strong>No build step required:</strong> Write vanilla JavaScript directly</li>
+				<li><strong>Module scripts:</strong> Use ES6 modules with <code>&lt;script type="module"&gt;</code></li>
+				<li><strong>Framework components:</strong> Use React/Svelte/Vue for complex interactions</li>
+				<li><strong>Progressive enhancement:</strong> Start with HTML, add JavaScript as needed</li>
+			</ul>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<script>
+	// Click counter
+	let clickCount = 0;
+	const counterButton = document.getElementById('click-counter');
+	const countSpan = document.getElementById('count');
+	
+	counterButton?.addEventListener('click', () => {
+		clickCount++;
+		if (countSpan) {
+			countSpan.textContent = clickCount.toString();
+		}
+	});
+	
+	// Current time updater
+	function updateTime() {
+		const timeElement = document.getElementById('current-time');
+		if (timeElement) {
+			timeElement.textContent = new Date().toLocaleTimeString();
+		}
+	}
+	
+	// Update time every second
+	setInterval(updateTime, 1000);
+	updateTime(); // Initial call
+	
+	// Text input handler
+	const textInput = document.getElementById('text-input') as HTMLInputElement;
+	const textOutput = document.getElementById('text-output');
+	
+	textInput?.addEventListener('input', (e) => {
+		const target = e.target as HTMLInputElement;
+		if (textOutput) {
+			textOutput.textContent = `You typed: ${target.value}`;
+		}
+	});
+</script>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.demo-section {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.demo-button {
+		background: #4f39fa;
+		color: white;
+		border: none;
+		padding: 1rem 2rem;
+		border-radius: 8px;
+		font-size: 18px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+	
+	.demo-button:hover {
+		background: #3d2fd8;
+	}
+	
+	.time-display {
+		margin: 2rem 0;
+		padding: 1rem;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 6px;
+	}
+	
+	#current-time {
+		font-size: 24px;
+		font-weight: bold;
+		color: #4f39fa;
+	}
+	
+	.form-demo {
+		margin: 2rem 0;
+	}
+	
+	#text-input {
+		padding: 0.5rem;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		font-size: 16px;
+		width: 300px;
+		margin-bottom: 1rem;
+	}
+	
+	#text-output {
+		padding: 0.5rem;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 4px;
+		min-height: 1.5rem;
+	}
+	
+	.info-box {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

@@ -1,0 +1,219 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Enable server-side rendering for this dynamic route
+export const prerender = false;
+
+const { id } = Astro.params;
+const requestTime = new Date().toISOString();
+const randomNumber = Math.floor(Math.random() * 1000);
+
+// Simulate fetching data based on the ID (this runs on each request)
+const mockDatabase = {
+	'example-id': { name: 'Example Item', category: 'Demo', price: 29.99 },
+	'product-123': { name: 'Amazing Product', category: 'Electronics', price: 199.99 },
+	'user-456': { name: 'John Doe', category: 'User Profile', price: null },
+	'order-789': { name: 'Order #789', category: 'Order', price: 89.50 }
+};
+
+// Get item data or create a default one
+const item = mockDatabase[id as keyof typeof mockDatabase] || {
+	name: `Dynamic Item ${id}`,
+	category: 'Unknown',
+	price: Math.floor(Math.random() * 100)
+};
+
+// Simulate server-side processing time
+const processingTime = Math.floor(Math.random() * 50) + 10; // 10-60ms
+
+// Get request headers
+const userAgent = Astro.request.headers.get('user-agent') || 'Unknown';
+const referer = Astro.request.headers.get('referer') || 'Direct';
+---
+
+<Layout title={`SSR Dynamic: ${item.name}`}>
+	<main>
+		<h1>🔗 SSR Dynamic Route</h1>
+		<p>This page demonstrates Server-Side Rendering with dynamic routes. Each request is processed on the server.</p>
+		
+		<div class="item-info">
+			<h2>📦 Item Details</h2>
+			<p><strong>ID:</strong> {id}</p>
+			<p><strong>Name:</strong> {item.name}</p>
+			<p><strong>Category:</strong> {item.category}</p>
+			{item.price && <p><strong>Price:</strong> ${item.price}</p>}
+		</div>
+		
+		<div class="request-details">
+			<h2>🔍 Request Details</h2>
+			<p><strong>Request Time:</strong> {requestTime}</p>
+			<p><strong>Random Number:</strong> {randomNumber}</p>
+			<p><strong>Processing Time:</strong> {processingTime}ms</p>
+			<p><strong>User Agent:</strong> {userAgent.substring(0, 80)}...</p>
+			<p><strong>Referer:</strong> {referer}</p>
+		</div>
+		
+		<div class="test-routes">
+			<h3>🧪 Test Different Routes</h3>
+			<p>Try these different dynamic routes (each will be processed server-side):</p>
+			<ul>
+				<li><a href="/ssr-dynamic/example-id">example-id</a></li>
+				<li><a href="/ssr-dynamic/product-123">product-123</a></li>
+				<li><a href="/ssr-dynamic/user-456">user-456</a></li>
+				<li><a href="/ssr-dynamic/order-789">order-789</a></li>
+				<li><a href="/ssr-dynamic/random-item">random-item</a></li>
+			</ul>
+		</div>
+		
+		<div class="refresh-demo">
+			<h3>🔄 Server Processing Demo</h3>
+			<p>Refresh this page to see server-side values change on each request:</p>
+			<button onclick="window.location.reload()" class="refresh-button">
+				Refresh Page
+			</button>
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ SSR Dynamic Route Features</h2>
+			<ul>
+				<li><strong>Server processing:</strong> Each request is handled by the server</li>
+				<li><strong>Dynamic parameters:</strong> Route parameters available via Astro.params</li>
+				<li><strong>Real-time data:</strong> Can fetch fresh data from databases/APIs</li>
+				<li><strong>Request context:</strong> Access to headers, cookies, and request details</li>
+				<li><strong>Personalization:</strong> Can customize content based on user/request</li>
+				<li><strong>No pre-generation:</strong> Routes don't need to be known at build time</li>
+			</ul>
+		</div>
+		
+		<div class="code-example">
+			<h3>💻 Code Structure</h3>
+			<pre><code>// Enable SSR for this route
+export const prerender = false;
+
+// Access route parameters
+const { id } = Astro.params;
+
+// Server-side data fetching
+const data = await fetchFromDatabase(id);
+
+// Access request details
+const userAgent = Astro.request.headers.get('user-agent');</code></pre>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.item-info {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.request-details {
+		background: rgba(255, 0, 0, 0.1);
+		border: 1px solid rgba(255, 0, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.test-routes {
+		background: rgba(255, 165, 0, 0.1);
+		border: 1px solid rgba(255, 165, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.test-routes a {
+		color: #4f39fa;
+		text-decoration: none;
+	}
+	
+	.test-routes a:hover {
+		text-decoration: underline;
+	}
+	
+	.refresh-demo {
+		background: rgba(0, 255, 255, 0.1);
+		border: 1px solid rgba(0, 255, 255, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+		text-align: center;
+	}
+	
+	.refresh-button {
+		background: #4f39fa;
+		color: white;
+		border: none;
+		padding: 0.8rem 1.5rem;
+		border-radius: 6px;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+	
+	.refresh-button:hover {
+		background: #3d2fd8;
+	}
+	
+	.info-box {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.code-example {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.code-example pre {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 1rem;
+		border-radius: 4px;
+		overflow-x: auto;
+	}
+	
+	.code-example code {
+		font-family: 'Courier New', monospace;
+		font-size: 14px;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

@@ -1,11 +1,73 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Astro Demo App">
+	<main>
+		<h1>🚀 Astro Demo Application</h1>
+		<p>Welcome to the Astro demo app showcasing various rendering modes and features!</p>
+		
+		<nav>
+			<h2>📋 Demo Pages</h2>
+			<ul>
+				<li><a href="/static-prerendered">Static Pre-rendered Page</a></li>
+				<li><a href="/react-component">React Component Demo</a></li>
+				<li><a href="/svelte-component">Svelte Component Demo</a></li>
+				<li><a href="/client-side">Client-side Rendering</a></li>
+				<li><a href="/ssg-page">SSG Page</a></li>
+				<li><a href="/ssg-dynamic/example-slug">SSG Dynamic Route</a></li>
+				<li><a href="/ssr-page">SSR Page</a></li>
+				<li><a href="/ssr-dynamic/example-id">SSR Dynamic Route</a></li>
+				<li><a href="/image-optimization-internal">Internal Image Optimization</a></li>
+				<li><a href="/image-optimization-external">External Image Optimization</a></li>
+				<li><a href="/content-collection">Content Collection Demo</a></li>
+				<li><a href="/nonexistent-page">404 Page Demo</a></li>
+			</ul>
+		</nav>
+	</main>
 </Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	
+	nav ul {
+		list-style: none;
+		padding: 0;
+	}
+	
+	nav li {
+		margin: 0.5rem 0;
+	}
+	
+	nav a {
+		color: #4f39fa;
+		text-decoration: none;
+		padding: 0.5rem;
+		border-radius: 4px;
+		transition: background-color 0.3s;
+	}
+	
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
+	}
+	
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	
+	h2 {
+		color: #4f39fa;
+	}
+</style>

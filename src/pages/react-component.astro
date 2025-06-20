@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ReactCounter from '../components/ReactCounter.tsx';
+---
+
+<Layout title="React Component Demo">
+	<main>
+		<h1>⚛️ React Component Demo</h1>
+		<p>This page demonstrates how to use React components in Astro with client-side hydration.</p>
+		
+		<div class="component-demo">
+			<ReactCounter client:load />
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ About React in Astro</h2>
+			<ul>
+				<li><strong>Server-side rendered by default:</strong> React components are rendered to HTML at build time</li>
+				<li><strong>Client-side hydration:</strong> Use directives like <code>client:load</code> to add interactivity</li>
+				<li><strong>Partial hydration:</strong> Only the components that need interactivity are hydrated</li>
+				<li><strong>Framework agnostic:</strong> Mix React with other frameworks in the same project</li>
+			</ul>
+		</div>
+		
+		<div class="hydration-options">
+			<h2>🔄 Hydration Options</h2>
+			<ul>
+				<li><code>client:load</code> - Hydrate immediately when page loads</li>
+				<li><code>client:idle</code> - Hydrate when browser becomes idle</li>
+				<li><code>client:visible</code> - Hydrate when component enters viewport</li>
+				<li><code>client:media</code> - Hydrate when media query matches</li>
+				<li><code>client:only</code> - Skip server-side rendering entirely</li>
+			</ul>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.component-demo {
+		margin: 2rem 0;
+	}
+	
+	.info-box, .hydration-options {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+	
+	code {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+	}
+</style>

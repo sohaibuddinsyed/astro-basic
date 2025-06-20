@@ -1,0 +1,194 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+// Generate static paths for all blog posts
+export async function getStaticPaths() {
+	const blogPosts = await getCollection('blog');
+	return blogPosts.map((post) => ({
+		params: { slug: post.slug },
+		props: { post },
+	}));
+}
+
+const { slug } = Astro.params;
+const post = await getEntry('blog', slug);
+
+if (!post) {
+	return Astro.redirect('/404');
+}
+
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+	<main>
+		<article class="blog-post">
+			<header class="post-header">
+				<h1>{post.data.title}</h1>
+				<div class="post-meta">
+					<span class="author">By {post.data.author}</span>
+					<span class="date">{post.data.pubDate.toLocaleDateString()}</span>
+				</div>
+				<p class="description">{post.data.description}</p>
+				{post.data.tags && (
+					<div class="tags">
+						{post.data.tags.map((tag) => (
+							<span class="tag">{tag}</span>
+						))}
+					</div>
+				)}
+			</header>
+			
+			<div class="post-content">
+				<Content />
+			</div>
+		</article>
+		
+		<nav class="post-navigation">
+			<a href="/content-collection" class="nav-link">← Back to Collection</a>
+			<a href="/" class="nav-link">Home</a>
+		</nav>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.blog-post {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 8px;
+		padding: 2rem;
+		margin: 2rem 0;
+	}
+	
+	.post-header {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+		padding-bottom: 2rem;
+		margin-bottom: 2rem;
+	}
+	
+	.post-header h1 {
+		margin: 0 0 1rem 0;
+		color: #4f39fa;
+		font-size: 2.5rem;
+	}
+	
+	.post-meta {
+		display: flex;
+		justify-content: space-between;
+		font-size: 16px;
+		color: #ccc;
+		margin-bottom: 1rem;
+	}
+	
+	.description {
+		font-size: 1.2rem;
+		color: #ddd;
+		font-style: italic;
+		margin: 1rem 0;
+	}
+	
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
+	
+	.tag {
+		background: rgba(79, 57, 250, 0.3);
+		padding: 0.3rem 0.8rem;
+		border-radius: 15px;
+		font-size: 14px;
+		color: white;
+	}
+	
+	.post-content {
+		font-size: 18px;
+		line-height: 1.8;
+	}
+	
+	.post-content :global(h1),
+	.post-content :global(h2),
+	.post-content :global(h3) {
+		color: #4f39fa;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+	}
+	
+	.post-content :global(h2) {
+		font-size: 1.8rem;
+	}
+	
+	.post-content :global(h3) {
+		font-size: 1.4rem;
+	}
+	
+	.post-content :global(p) {
+		margin: 1rem 0;
+	}
+	
+	.post-content :global(ul),
+	.post-content :global(ol) {
+		margin: 1rem 0;
+		padding-left: 2rem;
+	}
+	
+	.post-content :global(li) {
+		margin: 0.5rem 0;
+	}
+	
+	.post-content :global(code) {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: monospace;
+		font-size: 0.9em;
+	}
+	
+	.post-content :global(pre) {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 1rem;
+		border-radius: 6px;
+		overflow-x: auto;
+		margin: 1.5rem 0;
+	}
+	
+	.post-content :global(pre code) {
+		background: none;
+		padding: 0;
+	}
+	
+	.post-navigation {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 0;
+		margin-top: 2rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.2);
+	}
+	
+	.nav-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+		padding: 0.5rem 1rem;
+		border-radius: 4px;
+		transition: background-color 0.3s;
+	}
+	
+	.nav-link:hover {
+		background-color: rgba(79, 57, 250, 0.1);
+		text-decoration: underline;
+	}
+</style>

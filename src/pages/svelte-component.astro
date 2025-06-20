@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SvelteCounter from '../components/SvelteCounter.svelte';
+---
+
+<Layout title="Svelte Component Demo">
+	<main>
+		<h1>🔥 Svelte Component Demo</h1>
+		<p>This page demonstrates how to use Svelte components in Astro with client-side hydration.</p>
+		
+		<div class="component-demo">
+			<SvelteCounter client:load />
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ About Svelte in Astro</h2>
+			<ul>
+				<li><strong>Compiled components:</strong> Svelte components are compiled to vanilla JavaScript</li>
+				<li><strong>Small bundle size:</strong> No runtime framework overhead</li>
+				<li><strong>Scoped styles:</strong> CSS is automatically scoped to components</li>
+				<li><strong>Reactive by default:</strong> Built-in reactivity without additional libraries</li>
+				<li><strong>Server-side rendering:</strong> Components render to HTML at build time</li>
+			</ul>
+		</div>
+		
+		<div class="comparison">
+			<h2>⚖️ Svelte vs React</h2>
+			<div class="comparison-grid">
+				<div class="comparison-item">
+					<h3>Svelte</h3>
+					<ul>
+						<li>Compile-time optimizations</li>
+						<li>No virtual DOM</li>
+						<li>Smaller bundle sizes</li>
+						<li>Built-in state management</li>
+					</ul>
+				</div>
+				<div class="comparison-item">
+					<h3>React</h3>
+					<ul>
+						<li>Large ecosystem</li>
+						<li>Virtual DOM</li>
+						<li>More job opportunities</li>
+						<li>Extensive tooling</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.component-demo {
+		margin: 2rem 0;
+	}
+	
+	.info-box, .comparison {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.comparison-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+		margin-top: 1rem;
+	}
+	
+	.comparison-item {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1rem;
+		border-radius: 6px;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+</style>

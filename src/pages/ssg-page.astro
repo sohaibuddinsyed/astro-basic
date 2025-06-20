@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// This page uses Static Site Generation (SSG) - the default in Astro
+// It's pre-rendered at build time and served as static HTML
+
+const buildTime = new Date().toISOString();
+const randomNumber = Math.floor(Math.random() * 1000);
+
+// Simulate fetching data at build time
+const mockApiData = {
+	users: [
+		{ id: 1, name: 'Alice Johnson', role: 'Developer' },
+		{ id: 2, name: 'Bob Smith', role: 'Designer' },
+		{ id: 3, name: 'Carol Davis', role: 'Manager' }
+	],
+	stats: {
+		totalUsers: 3,
+		activeProjects: 12,
+		completedTasks: 156
+	}
+};
+---
+
+<Layout title="SSG Page Demo">
+	<main>
+		<h1>🏗️ Static Site Generation (SSG) Page</h1>
+		<p>This page demonstrates Astro's default SSG behavior where content is pre-rendered at build time.</p>
+		
+		<div class="build-info">
+			<h2>📊 Build Information</h2>
+			<p><strong>Generated at:</strong> {buildTime}</p>
+			<p><strong>Random build number:</strong> {randomNumber}</p>
+			<p><strong>Rendering mode:</strong> Static Site Generation (SSG)</p>
+		</div>
+		
+		<div class="data-section">
+			<h2>👥 Mock Data (Fetched at Build Time)</h2>
+			<div class="stats-grid">
+				<div class="stat-card">
+					<h3>Total Users</h3>
+					<div class="stat-number">{mockApiData.stats.totalUsers}</div>
+				</div>
+				<div class="stat-card">
+					<h3>Active Projects</h3>
+					<div class="stat-number">{mockApiData.stats.activeProjects}</div>
+				</div>
+				<div class="stat-card">
+					<h3>Completed Tasks</h3>
+					<div class="stat-number">{mockApiData.stats.completedTasks}</div>
+				</div>
+			</div>
+			
+			<div class="users-list">
+				<h3>Team Members</h3>
+				<ul>
+					{mockApiData.users.map(user => (
+						<li>
+							<strong>{user.name}</strong> - {user.role}
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ SSG Characteristics</h2>
+			<ul>
+				<li><strong>Pre-rendered:</strong> HTML generated at build time</li>
+				<li><strong>Fast loading:</strong> Served as static files</li>
+				<li><strong>SEO friendly:</strong> Content available to crawlers</li>
+				<li><strong>CDN cacheable:</strong> Can be cached globally</li>
+				<li><strong>Build-time data:</strong> Data fetched during build process</li>
+				<li><strong>No server required:</strong> Can be hosted on static file servers</li>
+			</ul>
+		</div>
+		
+		<div class="note">
+			<p><strong>Note:</strong> The build time and random number above will remain the same until you rebuild the site, demonstrating that this content is static.</p>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.build-info {
+		background: rgba(0, 255, 0, 0.1);
+		border: 1px solid rgba(0, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.data-section {
+		background: rgba(255, 165, 0, 0.1);
+		border: 1px solid rgba(255, 165, 0, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 1rem;
+		margin: 1rem 0;
+	}
+	
+	.stat-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1rem;
+		border-radius: 6px;
+		text-align: center;
+	}
+	
+	.stat-number {
+		font-size: 2rem;
+		font-weight: bold;
+		color: #4f39fa;
+	}
+	
+	.users-list {
+		margin-top: 2rem;
+	}
+	
+	.users-list ul {
+		list-style: none;
+		padding: 0;
+	}
+	
+	.users-list li {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 0.5rem 1rem;
+		margin: 0.5rem 0;
+		border-radius: 4px;
+	}
+	
+	.info-box {
+		background: rgba(79, 57, 250, 0.1);
+		border: 1px solid rgba(79, 57, 250, 0.3);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
+	}
+	
+	.note {
+		background: rgba(255, 255, 0, 0.1);
+		border: 1px solid rgba(255, 255, 0, 0.3);
+		border-radius: 8px;
+		padding: 1rem;
+		margin: 2rem 0;
+	}
+	
+	.back-link {
+		color: #4f39fa;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	.back-link:hover {
+		text-decoration: underline;
+	}
+</style>
