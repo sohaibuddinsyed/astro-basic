@@ -56,92 +56,72 @@ const buildTime = new Date().toISOString();
 			</ul>
 		</div>
 		
-		<div class="code-example">
-			<h3>💻 Code Example</h3>
-		</div>
-		
 		<a href="/" class="back-link">← Back to Home</a>
 	</main>
 </Layout>
 
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
 	}
 	
-	.post-content {
-		background: rgba(0, 255, 0, 0.1);
-		border: 1px solid rgba(0, 255, 0, 0.3);
-		border-radius: 8px;
-		padding: 2rem;
-		margin: 2rem 0;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.available-routes {
-		background: rgba(255, 165, 0, 0.1);
-		border: 1px solid rgba(255, 165, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav li {
+		margin: 0.5rem 0;
 	}
 	
-	.available-routes a {
-		color: #4f39fa;
-		text-decoration: none;
-	}
-	
-	.available-routes a:hover {
+	nav a {
+		color: #311d42;
 		text-decoration: underline;
-	}
-	
-	.info-box {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-	}
-	
-	.code-example {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-	}
-	
-	.code-example pre {
-		background: rgba(0, 0, 0, 0.3);
-		padding: 1rem;
+		padding: 0.5rem;
 		border-radius: 4px;
-		overflow-x: auto;
+		transition: background-color 0.3s;
 	}
 	
-	.code-example code {
-		font-family: 'Courier New', monospace;
-		font-size: 14px;
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
 	}
 	
-	.back-link {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
 	}
 	
-	.back-link:hover {
-		text-decoration: underline;
+	h2 {
+		color: #000000;
 	}
-	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
+	}
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
 		border-radius: 4px;
-		font-family: monospace;
+		cursor: pointer;
+	}
+
+	#current-time {
+		display: inline;
 	}
 </style>

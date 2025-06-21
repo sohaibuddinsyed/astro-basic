@@ -11,10 +11,14 @@ export default function ReactCounter() {
       backgroundColor: '#f0f8ff'
     }}>
       <h3>React Counter Component</h3>
-      <p>This is a React component with client-side interactivity.</p>
+      <p>This is a React component with client-side interactivity. JS is downloaded as a static resource 
+        and executed in the browser, see console log.</p>
       <p>Count: {count}</p>
       <button 
-        onClick={() => setCount(count + 1)}
+        onClick={() => {
+          console.log(`Incrementing counter to ${count + 1} - Executing in browser`)
+          setCount(count + 1)
+        }}
         style={{
           padding: '8px 16px',
           backgroundColor: '#61dafb',
@@ -26,7 +30,10 @@ export default function ReactCounter() {
         Increment
       </button>
       <button 
-        onClick={() => setCount(count - 1)}
+        onClick={() => {
+          console.log(`Decrementing counter to ${count - 1} - Executing in browser`)
+          setCount(count - 1)
+        }}
         style={{
           padding: '8px 16px',
           backgroundColor: '#ff6b6b',

@@ -15,7 +15,7 @@ import ReactCounter from '../components/ReactCounter.tsx';
 		<div class="info-box">
 			<h2>ℹ️ About React in Astro</h2>
 			<ul>
-				<li><strong>Server-side rendered by default:</strong> React components are rendered to HTML at build time</li>
+				<li><strong>Prerendered by default:</strong> React components are rendered to HTML at build time (w/o JS)</li>
 				<li><strong>Client-side hydration:</strong> Use directives like <code>client:load</code> to add interactivity</li>
 				<li><strong>Partial hydration:</strong> Only the components that need interactivity are hydrated</li>
 				<li><strong>Framework agnostic:</strong> Mix React with other frameworks in the same project</li>
@@ -38,42 +38,67 @@ import ReactCounter from '../components/ReactCounter.tsx';
 </Layout>
 
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
 	}
 	
-	.component-demo {
-		margin: 2rem 0;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.info-box, .hydration-options {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav li {
+		margin: 0.5rem 0;
 	}
 	
-	.back-link {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
-	}
-	
-	.back-link:hover {
+	nav a {
+		color: #311d42;
 		text-decoration: underline;
+		padding: 0.5rem;
+		border-radius: 4px;
+		transition: background-color 0.3s;
 	}
 	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
+	}
+	
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	
+	h2 {
+		color: #000000;
+	}
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
+	}
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
 		border-radius: 4px;
-		font-family: monospace;
+		cursor: pointer;
+	}
+
+	#current-time {
+		display: inline;
 	}
 </style>

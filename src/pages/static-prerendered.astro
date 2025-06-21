@@ -5,30 +5,87 @@ import Layout from '../layouts/Layout.astro';
 export const prerender = true;
 
 const buildTime = new Date().toISOString();
+const randomNumber = Math.floor(Math.random() * 1000);
+
+// Simulate fetching data at build time
+const mockApiData = {
+	users: [
+		{ id: 1, name: 'Alice Johnson', role: 'Developer' },
+		{ id: 2, name: 'Bob Smith', role: 'Designer' },
+		{ id: 3, name: 'Carol Davis', role: 'Manager' }
+	],
+	stats: {
+		totalUsers: 3,
+		activeProjects: 12,
+		completedTasks: 156
+	}
+};
 ---
 
 <Layout title="Static Pre-rendered Page">
 	<main>
 		<h1>📄 Static Pre-rendered Page</h1>
-		<p>This page is statically pre-rendered at build time using <code>export const prerender = true;</code></p>
+		<p>This page is statically pre-rendered at build time using: 
+			<code id = "codeBlock">export const prerender = true;</code></p>
 		
 		<div class="info-box">
 			<h2>ℹ️ Information</h2>
-			<p><strong>Build Time:</strong> {buildTime}</p>
-			<p><strong>Rendering Mode:</strong> Static Site Generation (SSG)</p>
+			<p><strong>Build Time:</strong> {buildTime} (Only changes at npm run build)</p>
+			<p><strong>Rendering Mode:</strong> Prerendering/Static Site Generation (SSG)</p>
 			<p><strong>When Generated:</strong> At build time</p>
-			<p><strong>Performance:</strong> Fastest - served as static HTML</p>
+			<p><strong>Performance:</strong> Fastest - served as static HTML (All client-side JavaScript is automatically stripped out)</p>
+		</div>
+
+		<div class="build-info">
+			<h2>📊 Build Information</h2>
+			<p><strong>Generated at:</strong> {buildTime}</p>
+			<p><strong>Random build number:</strong> {randomNumber}</p>
+			<p><strong>Rendering mode:</strong> Static Site Generation (SSG)</p>
 		</div>
 		
-		<div class="features">
-			<h2>✨ Features</h2>
+		<div class="data-section">
+			<h2>👥 Mock Data (Fetched at Build Time)</h2>
+			<div class="stats-grid">
+				<div class="stat-card">
+					<h3>Total Users</h3>
+					<div class="stat-number">{mockApiData.stats.totalUsers}</div>
+				</div>
+				<div class="stat-card">
+					<h3>Active Projects</h3>
+					<div class="stat-number">{mockApiData.stats.activeProjects}</div>
+				</div>
+				<div class="stat-card">
+					<h3>Completed Tasks</h3>
+					<div class="stat-number">{mockApiData.stats.completedTasks}</div>
+				</div>
+			</div>
+			
+			<div class="users-list">
+				<h3>Team Members</h3>
+				<ul>
+					{mockApiData.users.map(user => (
+						<li>
+							<strong>{user.name}</strong> - {user.role}
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+		
+		<div class="info-box">
+			<h2>ℹ️ SSG Characteristics</h2>
 			<ul>
-				<li>Pre-rendered at build time</li>
-				<li>Served as static HTML</li>
-				<li>Excellent performance and SEO</li>
-				<li>Perfect for content that doesn't change often</li>
-				<li>Can be cached by CDNs</li>
+				<li><strong>Pre-rendered:</strong> HTML generated at build time</li>
+				<li><strong>Fast loading:</strong> Served as static files</li>
+				<li><strong>SEO friendly:</strong> Content available to crawlers</li>
+				<li><strong>CDN cacheable:</strong> Can be cached globally</li>
+				<li><strong>Build-time data:</strong> Data fetched during build process</li>
+				<li><strong>No server required:</strong> Can be hosted on static file servers</li>
 			</ul>
+		</div>
+		
+		<div class="note">
+			<p><strong>Note:</strong> The build time and random number above will remain the same until you rebuild the site, demonstrating that this content is static.</p>
 		</div>
 		
 		<a href="/" class="back-link">← Back to Home</a>
@@ -36,46 +93,55 @@ const buildTime = new Date().toISOString();
 </Layout>
 
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
 	}
 	
-	.info-box {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.features {
-		background: rgba(0, 255, 0, 0.1);
-		border: 1px solid rgba(0, 255, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav li {
+		margin: 0.5rem 0;
 	}
 	
-	.back-link {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
-	}
-	
-	.back-link:hover {
+	nav a {
+		color: #311d42;
 		text-decoration: underline;
+		padding: 0.5rem;
+		border-radius: 4px;
+		transition: background-color 0.3s;
 	}
 	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
-		border-radius: 4px;
-		font-family: monospace;
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
+	}
+	
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	
+	h2 {
+		color: #000000;
+	}
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
 	}
 </style>

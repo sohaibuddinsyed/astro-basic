@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import spaceImg from '../assets/space.webp';
+---
+
+<Layout title="Internal Image Optimization">
+	<main>
+		<h1>🖼️ Internal Image Optimization</h1>
+		<p>This page demonstrates Astro's built-in image optimization for local images using the <code>Image</code> component.</p>
+		
+		<div class="comparison-section">
+			<h2>⚖️ Comparison: Regular vs Optimized</h2>
+			<div class="comparison-grid">
+				<div class="comparison-item">
+					<h3>Regular &lt;img&gt; tag</h3>
+					<img src="/space.webp" alt="Regular image" width="300" height="225" />
+					<ul>
+						<li>No optimization</li>
+						<li>Original file size (See image size in N/W tab)</li>
+						<li>No format conversion</li>
+						<li>No responsive sizing</li>
+					</ul>
+				</div>
+				<div class="comparison-item">
+					<h3>Astro &lt;Image&gt; component</h3>
+					<Image 
+						src={spaceImg}
+						alt="Optimized image"
+						width={300}
+						height={225}
+						quality={80}
+						format="png"
+					/>
+					<ul>
+						<li>Automatic optimization</li>
+						<li>Compressed file size (See image size in N/W tab)</li>
+						<li>Modern formats (WebP, AVIF)</li>
+						<li>Responsive sizing</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="features-section">
+			<h2>✨ Image Optimization Features</h2>
+			<div class="features-grid">
+				<div class="feature-card">
+					<h3>🗜️ Compression</h3>
+					<p>Automatic compression with quality control</p>
+				</div>
+				<div class="feature-card">
+					<h3>🔄 Format Conversion</h3>
+					<p>Convert to modern formats like WebP and AVIF</p>
+				</div>
+				<div class="feature-card">
+					<h3>📱 Responsive</h3>
+					<p>Generate multiple sizes for different devices</p>
+				</div>
+				<div class="feature-card">
+					<h3>⚡ Lazy Loading</h3>
+					<p>Built-in lazy loading for better performance</p>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="info-box">
+			<h2>ℹ️ How It Works</h2>
+			<ul>
+				<li><strong>Build-time optimization:</strong> Images are processed during the build</li>
+				<li><strong>Multiple formats:</strong> Generates WebP, AVIF, and fallback formats</li>
+				<li><strong>Size variants:</strong> Creates different sizes for responsive design</li>
+				<li><strong>Automatic srcset:</strong> Generates srcset attributes automatically</li>
+				<li><strong>Type safety:</strong> TypeScript support for image imports</li>
+			</ul>
+		</div>
+		
+		<a href="/" class="back-link">← Back to Home</a>
+	</main>
+</Layout>
+
+<style>
+		main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: rgb(13, 2, 79);
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	
+	nav ul {
+		list-style: none;
+		padding: 0;
+	}
+	
+	nav li {
+		margin: 0.5rem 0;
+	}
+	
+	nav a {
+		color: #311d42;
+		text-decoration: underline;
+		padding: 0.5rem;
+		border-radius: 4px;
+		transition: background-color 0.3s;
+	}
+	
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
+	}
+	
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	
+	h2 {
+		color: #000000;
+	}
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
+	}
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	#current-time {
+		display: inline;
+	}
+</style>

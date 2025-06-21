@@ -2,17 +2,20 @@
   let count = 0;
   
   function increment() {
+    console.log(`Incrementing counter to ${count + 1} - Executing in browser`)
     count += 1;
   }
   
   function decrement() {
+    console.log(`Decrementing counter to ${count - 1} - Executing in browser`)
     count -= 1;
   }
 </script>
 
 <div class="svelte-counter">
   <h3>Svelte Counter Component</h3>
-  <p>This is a Svelte component with client-side interactivity.</p>
+  <p>This is a Svelte component with client-side interactivity. JS is downloaded as a static resource 
+        and executed in the browser, see console log.</p>
   <p>Count: {count}</p>
   <button on:click={increment} class="increment-btn">
     Increment

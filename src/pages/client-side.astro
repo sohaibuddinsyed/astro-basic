@@ -1,28 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// This page is statically pre-rendered at build time
+export const prerender = true;
 ---
 
 <Layout title="Client-side Rendering Demo">
 	<main>
 		<h1>💻 Client-side Rendering Demo</h1>
-		<p>This page demonstrates client-side JavaScript functionality in Astro.</p>
+		<p>This page demonstrates client-side JavaScript functionality in Astro with &lt;script&gt; tag.</p>
 		
-		<div class="demo-section">
-			<h2>🎯 Interactive Elements</h2>
-			<button id="click-counter" class="demo-button">
-				Clicks: <span id="count">0</span>
-			</button>
-			
-			<div class="time-display">
-				<h3>⏰ Current Time</h3>
-				<div id="current-time"></div>
-			</div>
-			
-			<div class="form-demo">
-				<h3>📝 Form Interaction</h3>
-				<input type="text" id="text-input" placeholder="Type something..." />
-				<div id="text-output">You typed: </div>
-			</div>
+		<div class="info-box">
+			<h2>ℹ️ Information</h2>
+			<p><strong>Counter:</strong> 
+				<button id="click-counter">Clicks: <span id="count">0</span></button>
+				(Increments at runtime as JS is bundled with client side html and runs in browser, see console log in browser)</p>
+			<p><strong>Time:</strong> Updates at runtime due to client side JS <p id="current-time"/> </p>
+			<p><strong>Rendering Mode:</strong> Client Side Rendering</p>
+			<p><strong>When Generated:</strong> At build time, JS is bundled at build time and executes in browser</p>
+			<p><strong>Performance:</strong> Fastest - served as static HTML (All client-side JavaScript is automatically stripped out)</p>
 		</div>
 		
 		<div class="info-box">
@@ -48,6 +44,7 @@ import Layout from '../layouts/Layout.astro';
 	
 	counterButton?.addEventListener('click', () => {
 		clickCount++;
+		console.log(`Incrementing counter to ${clickCount} - Executing in browser`)
 		if (countSpan) {
 			countSpan.textContent = clickCount.toString();
 		}
@@ -76,96 +73,68 @@ import Layout from '../layouts/Layout.astro';
 		}
 	});
 </script>
-
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
 	}
 	
-	.demo-section {
-		background: rgba(0, 255, 0, 0.1);
-		border: 1px solid rgba(0, 255, 0, 0.3);
-		border-radius: 8px;
-		padding: 2rem;
-		margin: 2rem 0;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.demo-button {
-		background: #4f39fa;
-		color: white;
-		border: none;
-		padding: 1rem 2rem;
-		border-radius: 8px;
-		font-size: 18px;
-		cursor: pointer;
+	nav li {
+		margin: 0.5rem 0;
+	}
+	
+	nav a {
+		color: #311d42;
+		text-decoration: underline;
+		padding: 0.5rem;
+		border-radius: 4px;
 		transition: background-color 0.3s;
 	}
 	
-	.demo-button:hover {
-		background: #3d2fd8;
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
 	}
 	
-	.time-display {
-		margin: 2rem 0;
-		padding: 1rem;
-		background: rgba(255, 255, 255, 0.05);
-		border-radius: 6px;
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
 	}
 	
+	h2 {
+		color: #000000;
+	}
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
+	}
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
 	#current-time {
-		font-size: 24px;
-		font-weight: bold;
-		color: #4f39fa;
-	}
-	
-	.form-demo {
-		margin: 2rem 0;
-	}
-	
-	#text-input {
-		padding: 0.5rem;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-		font-size: 16px;
-		width: 300px;
-		margin-bottom: 1rem;
-	}
-	
-	#text-output {
-		padding: 0.5rem;
-		background: rgba(255, 255, 255, 0.05);
-		border-radius: 4px;
-		min-height: 1.5rem;
-	}
-	
-	.info-box {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-	}
-	
-	.back-link {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
-	}
-	
-	.back-link:hover {
-		text-decoration: underline;
-	}
-	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
-		border-radius: 4px;
-		font-family: monospace;
+		display: inline;
 	}
 </style>

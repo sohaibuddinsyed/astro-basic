@@ -8,8 +8,7 @@ const currentUrl = Astro.url.pathname;
 <Layout title="404 - Page Not Found">
 	<main>
 		<div class="error-container">
-			<div class="error-code">404</div>
-			<h1>🔍 Page Not Found</h1>
+			<h1>🔍 404 - Page Not Found </h1>
 			<p class="error-message">
 				Oops! The page you're looking for doesn't exist or has been moved.
 			</p>
@@ -19,6 +18,10 @@ const currentUrl = Astro.url.pathname;
 				<p><strong>Error Type:</strong> Not Found</p>
 				<p><strong>What happened:</strong> The server cannot find the requested resource.</p>
 			</div>
+
+						<a href="/" class="back-link">← Back to Home</a>
+
+						<hr>
 			
 			<div class="suggestions">
 				<h2>🤔 What can you do?</h2>
@@ -28,18 +31,6 @@ const currentUrl = Astro.url.pathname;
 					<li>Use the navigation menu to find what you're looking for</li>
 					<li>Try searching for the content you need</li>
 				</ul>
-			</div>
-			
-			<div class="quick-links">
-				<h3>🔗 Quick Links</h3>
-				<div class="links-grid">
-					<a href="/" class="quick-link">🏠 Home</a>
-					<a href="/static-prerendered" class="quick-link">📄 Static Page</a>
-					<a href="/react-component" class="quick-link">⚛️ React Demo</a>
-					<a href="/svelte-component" class="quick-link">🔥 Svelte Demo</a>
-					<a href="/content-collection" class="quick-link">📚 Blog</a>
-					<a href="/ssg-page" class="quick-link">🏗️ SSG Demo</a>
-				</div>
 			</div>
 			
 			<div class="error-info">
@@ -79,145 +70,67 @@ const currentUrl = Astro.url.pathname;
 </Layout>
 
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
-		min-height: 80vh;
-		display: flex;
-		align-items: center;
 	}
 	
-	.error-container {
-		width: 100%;
-		text-align: center;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.error-code {
-		font-size: 8rem;
-		font-weight: bold;
-		color: #ff6b6b;
-		text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
-		margin-bottom: 1rem;
-		line-height: 1;
+	nav li {
+		margin: 0.5rem 0;
+	}
+	
+	nav a {
+		color: #311d42;
+		text-decoration: underline;
+		padding: 0.5rem;
+		border-radius: 4px;
+		transition: background-color 0.3s;
+	}
+	
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
 	}
 	
 	h1 {
-		font-size: 3rem;
-		margin-bottom: 1rem;
-		color: #4f39fa;
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
 	}
 	
-	.error-message {
-		font-size: 1.3rem;
-		margin-bottom: 2rem;
-		color: #ddd;
+	h2 {
+		color: #000000;
 	}
-	
-	.error-details {
-		background: rgba(255, 107, 107, 0.1);
-		border: 1px solid rgba(255, 107, 107, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-		text-align: left;
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
 	}
-	
-	.suggestions {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-		text-align: left;
-	}
-	
-	.suggestions a {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
-	}
-	
-	.suggestions a:hover {
-		text-decoration: underline;
-	}
-	
-	.quick-links {
-		background: rgba(0, 255, 0, 0.1);
-		border: 1px solid rgba(0, 255, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-	}
-	
-	.links-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-		gap: 1rem;
-		margin-top: 1rem;
-	}
-	
-	.quick-link {
-		background: rgba(255, 255, 255, 0.05);
-		color: white;
-		text-decoration: none;
-		padding: 1rem;
-		border-radius: 6px;
-		transition: all 0.3s;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-	}
-	
-	.quick-link:hover {
-		background: rgba(79, 57, 250, 0.2);
-		transform: translateY(-2px);
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	}
-	
-	.error-info {
-		background: rgba(255, 165, 0, 0.1);
-		border: 1px solid rgba(255, 165, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-		text-align: left;
-	}
-	
-	.astro-info {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-		text-align: left;
-	}
-	
-	.features {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 1rem;
-		margin-top: 1rem;
-	}
-	
-	.feature {
-		background: rgba(255, 255, 255, 0.05);
-		padding: 1rem;
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
 		border-radius: 4px;
-		font-size: 14px;
+		cursor: pointer;
 	}
-	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
-		border-radius: 4px;
-		font-family: monospace;
-	}
-	
-	h2, h3 {
-		color: #4f39fa;
-		margin-bottom: 1rem;
+
+	#current-time {
+		display: inline;
 	}
 </style>

@@ -1,28 +1,31 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import astroImg from "../assets/astro.svg"
 ---
 
 <Layout title="Astro Demo App">
 	<main>
-		<h1>🚀 Astro Demo Application</h1>
+		<h1>Astro Demo Application</h1>
+		<Image id="astroImg" src={astroImg} alt="s"/>
 		<p>Welcome to the Astro demo app showcasing various rendering modes and features!</p>
 		
 		<nav>
 			<h2>📋 Demo Pages</h2>
-			<ul>
-				<li><a href="/static-prerendered">Static Pre-rendered Page</a></li>
-				<li><a href="/react-component">React Component Demo</a></li>
-				<li><a href="/svelte-component">Svelte Component Demo</a></li>
-				<li><a href="/client-side">Client-side Rendering</a></li>
-				<li><a href="/ssg-page">SSG Page</a></li>
-				<li><a href="/ssg-dynamic/example-slug">SSG Dynamic Route</a></li>
-				<li><a href="/ssr-page">SSR Page</a></li>
-				<li><a href="/ssr-dynamic/example-id">SSR Dynamic Route</a></li>
-				<li><a href="/image-optimization-internal">Internal Image Optimization</a></li>
-				<li><a href="/image-optimization-external">External Image Optimization</a></li>
+			<ol>
+				<li><a href="/static-prerendered">Prerendering: Static Page (SSG)</a></li>
+				<li><a href="/ssg-dynamic/example-slug">Prerendering: Static Page (SSG) w/ Dynamic Route</a></li>
+				<li><a href="/prerendering-image-optimization">Prerendering: Image Optimization</a></li>
+				<li><a href="/client-side">Prerendering: Static Page with client-side JS using &lt;script&gt; tag</a></li>
+				<li><a href="/react-component">Client Island: React Component</a></li>
+				<li><a href="/svelte-component">Client Island: Svelte Component</a></li>
+				<li><a href="/ssr-page">Server Island: Server Side Rendering (SSR)</a></li>
+				<li><a href="/ssr-dynamic/example-id">Server Island: SSR Dynamic Route</a></li>
+				<li><a href="/ssr-image-optimization">SSR: Internal Image Optimization</a></li>
+				<li><a href="/image-optimization-external">SSR: External Image Optimization</a></li>
 				<li><a href="/content-collection">Content Collection Demo</a></li>
 				<li><a href="/nonexistent-page">404 Page Demo</a></li>
-			</ul>
+			</ol>
 		</nav>
 	</main>
 </Layout>
@@ -33,7 +36,7 @@ import Layout from '../layouts/Layout.astro';
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
+		color: rgb(13, 2, 79);
 		font-size: 20px;
 		line-height: 1.6;
 	}
@@ -48,11 +51,21 @@ import Layout from '../layouts/Layout.astro';
 	}
 	
 	nav a {
-		color: #4f39fa;
-		text-decoration: none;
+		color: #311d42;
+		text-decoration: underline;
 		padding: 0.5rem;
 		border-radius: 4px;
 		transition: background-color 0.3s;
+	}
+
+	#astroIng {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
 	}
 	
 	nav a:hover {
@@ -68,6 +81,8 @@ import Layout from '../layouts/Layout.astro';
 	}
 	
 	h2 {
-		color: #4f39fa;
+		color: #000000;
 	}
+
+	
 </style>

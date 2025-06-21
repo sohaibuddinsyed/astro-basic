@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import img from "../assets/ssd.png"
-import Welcome from '../components/Welcome.astro';
+import SSRComponent from '../components/SSRComponent.astro';
 import Layout from '../layouts/Layout.astro';
 
 export const prerender = false;
@@ -10,6 +10,5 @@ export const prerender = false;
 ---
 
 <Layout>
-	<Welcome />
-	<Image src={img} alt={"Some alt"}/>
+	<SSRComponent/>
 </Layout>

@@ -174,156 +174,67 @@ import { Image } from 'astro:assets';
 </Layout>
 
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
 	}
 	
-	.external-image-demo {
-		background: rgba(0, 255, 0, 0.1);
-		border: 1px solid rgba(0, 255, 0, 0.3);
-		border-radius: 8px;
-		padding: 2rem;
-		margin: 2rem 0;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.image-example {
-		margin: 2rem 0;
-		padding: 1rem;
-		background: rgba(255, 255, 255, 0.05);
-		border-radius: 6px;
-		text-align: center;
+	nav li {
+		margin: 0.5rem 0;
 	}
 	
-	.external-image {
-		border-radius: 8px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-		margin: 1rem 0;
-	}
-	
-	.image-note {
-		font-style: italic;
-		color: #ccc;
-		font-size: 14px;
-	}
-	
-	.optimization-techniques {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 2rem;
-		margin: 2rem 0;
-	}
-	
-	.techniques-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 1rem;
-		margin-top: 1rem;
-	}
-	
-	.technique-card {
-		background: rgba(255, 255, 255, 0.05);
-		padding: 1.5rem;
-		border-radius: 6px;
-	}
-	
-	.technique-card pre {
-		background: rgba(0, 0, 0, 0.3);
-		padding: 0.5rem;
-		border-radius: 4px;
-		font-size: 12px;
-		margin-top: 0.5rem;
-		overflow-x: auto;
-	}
-	
-	.cdn-services {
-		background: rgba(255, 165, 0, 0.1);
-		border: 1px solid rgba(255, 165, 0, 0.3);
-		border-radius: 8px;
-		padding: 2rem;
-		margin: 2rem 0;
-	}
-	
-	.cdn-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 1rem;
-		margin-top: 1rem;
-	}
-	
-	.cdn-card {
-		background: rgba(255, 255, 255, 0.05);
-		padding: 1.5rem;
-		border-radius: 6px;
-	}
-	
-	.cdn-card code {
-		display: block;
-		background: rgba(0, 0, 0, 0.3);
-		padding: 0.5rem;
-		border-radius: 4px;
-		font-size: 11px;
-		margin-top: 0.5rem;
-		word-break: break-all;
-	}
-	
-	.performance-tips {
-		background: rgba(0, 255, 255, 0.1);
-		border: 1px solid rgba(0, 255, 255, 0.3);
-		border-radius: 8px;
-		padding: 2rem;
-		margin: 2rem 0;
-	}
-	
-	.info-box {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 8px;
-		padding: 2rem;
-		margin: 2rem 0;
-	}
-	
-	.comparison-table {
-		overflow-x: auto;
-	}
-	
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		margin-top: 1rem;
-	}
-	
-	th, td {
-		padding: 0.8rem;
-		text-align: left;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-	}
-	
-	th {
-		background: rgba(79, 57, 250, 0.2);
-		font-weight: bold;
-	}
-	
-	.back-link {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
-	}
-	
-	.back-link:hover {
+	nav a {
+		color: #311d42;
 		text-decoration: underline;
+		padding: 0.5rem;
+		border-radius: 4px;
+		transition: background-color 0.3s;
 	}
 	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
+	}
+	
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	
+	h2 {
+		color: #000000;
+	}
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
+	}
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
 		border-radius: 4px;
-		font-family: monospace;
+		cursor: pointer;
+	}
+
+	#current-time {
+		display: inline;
 	}
 </style>
