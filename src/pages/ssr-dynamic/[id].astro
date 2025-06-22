@@ -85,135 +85,72 @@ const referer = Astro.request.headers.get('referer') || 'Direct';
 			</ul>
 		</div>
 		
-		<div class="code-example">
-			<h3>💻 Code Structure</h3>
-			<pre><code>// Enable SSR for this route
-export const prerender = false;
-
-// Access route parameters
-const { id } = Astro.params;
-
-// Server-side data fetching
-const data = await fetchFromDatabase(id);
-
-// Access request details
-const userAgent = Astro.request.headers.get('user-agent');</code></pre>
-		</div>
-		
 		<a href="/" class="back-link">← Back to Home</a>
 	</main>
 </Layout>
 
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
 	}
 	
-	.item-info {
-		background: rgba(0, 255, 0, 0.1);
-		border: 1px solid rgba(0, 255, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.request-details {
-		background: rgba(255, 0, 0, 0.1);
-		border: 1px solid rgba(255, 0, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav li {
+		margin: 0.5rem 0;
 	}
 	
-	.test-routes {
-		background: rgba(255, 165, 0, 0.1);
-		border: 1px solid rgba(255, 165, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-	}
-	
-	.test-routes a {
-		color: #4f39fa;
-		text-decoration: none;
-	}
-	
-	.test-routes a:hover {
+	nav a {
+		color: #311d42;
 		text-decoration: underline;
-	}
-	
-	.refresh-demo {
-		background: rgba(0, 255, 255, 0.1);
-		border: 1px solid rgba(0, 255, 255, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-		text-align: center;
-	}
-	
-	.refresh-button {
-		background: #4f39fa;
-		color: white;
-		border: none;
-		padding: 0.8rem 1.5rem;
-		border-radius: 6px;
-		font-size: 16px;
-		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 4px;
 		transition: background-color 0.3s;
 	}
 	
-	.refresh-button:hover {
-		background: #3d2fd8;
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
 	}
 	
-	.info-box {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
 	}
 	
-	.code-example {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	h2 {
+		color: #000000;
 	}
-	
-	.code-example pre {
-		background: rgba(0, 0, 0, 0.3);
-		padding: 1rem;
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
+	}
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
 		border-radius: 4px;
-		overflow-x: auto;
+		cursor: pointer;
 	}
-	
-	.code-example code {
-		font-family: 'Courier New', monospace;
-		font-size: 14px;
-	}
-	
-	.back-link {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
-	}
-	
-	.back-link:hover {
-		text-decoration: underline;
-	}
-	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
-		border-radius: 4px;
-		font-family: monospace;
+
+	#current-time {
+		display: inline;
 	}
 </style>

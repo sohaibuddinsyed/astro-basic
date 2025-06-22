@@ -105,120 +105,67 @@ const serverData = {
 </Layout>
 
 <style>
-	main {
+		main {
 		margin: auto;
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 18px;
+		color: rgb(13, 2, 79);
+		font-size: 20px;
 		line-height: 1.6;
 	}
 	
-	.request-info {
-		background: rgba(255, 0, 0, 0.1);
-		border: 1px solid rgba(255, 0, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 	
-	.server-data {
-		background: rgba(0, 255, 0, 0.1);
-		border: 1px solid rgba(0, 255, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	nav li {
+		margin: 0.5rem 0;
 	}
 	
-	.data-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 1rem;
-		margin: 1rem 0;
-	}
-	
-	.data-card {
-		background: rgba(255, 255, 255, 0.05);
-		padding: 1rem;
-		border-radius: 6px;
-		text-align: center;
-	}
-	
-	.data-value {
-		font-size: 1.2rem;
-		font-weight: bold;
-		color: #4f39fa;
-		margin-top: 0.5rem;
-	}
-	
-	.refresh-demo {
-		background: rgba(255, 165, 0, 0.1);
-		border: 1px solid rgba(255, 165, 0, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
-		text-align: center;
-	}
-	
-	.refresh-button {
-		background: #4f39fa;
-		color: white;
-		border: none;
-		padding: 0.8rem 1.5rem;
-		border-radius: 6px;
-		font-size: 16px;
-		cursor: pointer;
+	nav a {
+		color: #311d42;
+		text-decoration: underline;
+		padding: 0.5rem;
+		border-radius: 4px;
 		transition: background-color 0.3s;
 	}
 	
-	.refresh-button:hover {
-		background: #3d2fd8;
+	nav a:hover {
+		background-color: rgba(79, 57, 250, 0.1);
 	}
 	
-	.info-box {
-		background: rgba(79, 57, 250, 0.1);
-		border: 1px solid rgba(79, 57, 250, 0.3);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
 	}
 	
-	.comparison {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 8px;
-		padding: 1.5rem;
-		margin: 2rem 0;
+	h2 {
+		color: #000000;
 	}
-	
-	.comparison-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 2rem;
-		margin-top: 1rem;
+
+	#codeBlock {
+		display: inline-block;
+		border-radius: 1px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		background-color:#dadada;
+		width: 100%;
 	}
-	
-	.comparison-item {
-		background: rgba(255, 255, 255, 0.05);
-		padding: 1rem;
-		border-radius: 6px;
-	}
-	
-	.back-link {
-		color: #4f39fa;
-		text-decoration: none;
-		font-weight: bold;
-	}
-	
-	.back-link:hover {
-		text-decoration: underline;
-	}
-	
-	code {
-		background: rgba(255, 255, 255, 0.1);
-		padding: 0.2rem 0.4rem;
+
+	#click-counter {
+		padding: 8px 16px;
+		background-color: #61dafb;
+		border: none;
 		border-radius: 4px;
-		font-family: monospace;
+		cursor: pointer;
+	}
+
+	#current-time {
+		display: inline;
 	}
 </style>
